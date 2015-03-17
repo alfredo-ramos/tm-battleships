@@ -1,4 +1,4 @@
-The Battleships
+# The Battleships
 =================
 The net.thoughtmachine.Application is the starting point. It takes two optional parameters, the input resource name and
 the output file. If none of them are given, the default input is /input.txt which will load the file from the classpath.
