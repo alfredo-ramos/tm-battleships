@@ -20,39 +20,25 @@ public class Ship {
         this.sunk = false;
     }
 
-    private Ship copy() {
+    Ship copy() {
         return new Ship(x,y,direction);
     }
 
     /**
      * Sinks the ship as a result of a shot.
      */
-    public void sink() {
+    public Ship sink() {
         this.sunk = true;
-    }
-
-    public void move(List<Operation.Move> moves, Board board, int lineNumber) {
-        Ship copy = this.copy();
-        moves.forEach(move -> copy.move(move, board, lineNumber));
-        Optional<Ship> position = board.at(copy.getX(), copy.getY());
-        position.ifPresent(ship -> { if( ship != this && !ship.isSunk()) {
-                throw new IllegalOperationException(
-                        String.format("Cannot move to a location occupied by another not-sunken ship at (%d,%d).",
-                                copy.getX(), copy.getY()));
-            }
-        });
-        // no ship there, then set the new location
-        board.remove(this.getX(), this.getY());
-        board.setShip(copy);
+        return this;
     }
 
 
-    private void move(Operation.Move move, Board board, int lineNumber) {
+    void move(Operation.Move move, Board board) {
         switch (move) {
             case M:
                 this.forward();
                 // In case it gets out of the board during the moves.
-                board.checkCoordinates(this.x, this.y, lineNumber);
+                board.checkCoordinates(this.x, this.y);
                 break;
             case R:
                 this.rotateRight();

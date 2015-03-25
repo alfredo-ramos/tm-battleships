@@ -24,19 +24,22 @@ public class Application {
         if(is == null) {
             throw new IllegalArgumentException(String.format("Input resource '%s' could not be found.", input));
         }
+        int lineNumber = 0;
         try (LineNumberReader reader = new LineNumberReader(new InputStreamReader(is, StandardCharsets.UTF_8))) {
+            lineNumber = reader.getLineNumber();
             int boardSize = readSize(reader);
 
-            @SuppressWarnings("unchecked")
             Board board = new Board(boardSize);
             readLocations(reader, board);
 
             String line;
             while ((line = reader.readLine()) != null) {
-                Operation operation = Operation.parse(line, reader.getLineNumber());
+                Operation operation = Operation.parse(line);
                 operation.apply(board);
             }
             return board;
+        } catch(IllegalOperationException | InvalidInputFileFormat e) {
+            throw new GameException(String.format("Error while processing line %d.", lineNumber), e);
         }
     }
 

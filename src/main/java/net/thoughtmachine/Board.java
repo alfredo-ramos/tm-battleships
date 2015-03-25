@@ -29,14 +29,14 @@ public class Board {
         board[ship.getX()][ship.getY()] = Optional.of(ship);
     }
 
-    public void checkCoordinates(int x, int y, int lineNumber) {
+    public void checkCoordinates(int x, int y) {
         if(x >= board.length || x < 0) {
             throw new IllegalOperationException(
-                    String.format("Invalid X coordinate %d for operation at line %d", x, lineNumber));
+                    String.format("Invalid X coordinate %d for operation.", x));
         }
         if(y >= board.length || y < 0) {
             throw new IllegalOperationException(
-                    String.format("Invalid Y coordinate %d for operation at line %d", y, lineNumber));
+                    String.format("Invalid Y coordinate %d for operation", y));
         }
     }
 

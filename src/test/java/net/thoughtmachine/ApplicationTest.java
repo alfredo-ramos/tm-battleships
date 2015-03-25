@@ -1,9 +1,6 @@
 package net.thoughtmachine;
 
-import org.junit.Assert;
 import org.junit.Test;
-
-import java.io.IOException;
 
 import static org.hamcrest.CoreMatchers.is;
 import static org.junit.Assert.assertThat;
