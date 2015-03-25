@@ -1,8 +1,6 @@
 package net.thoughtmachine;
 
 import java.io.PrintWriter;
-import java.util.List;
-import java.util.Optional;
 
 /**
  * Represents a ship with its coordinates, direction and condition.
